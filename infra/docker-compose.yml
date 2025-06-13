@@ -1,0 +1,281 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  api-gateway:
+    build:
+      context: ../src/backend
+      dockerfile: ../../infra/docker/backend/Dockerfile
+      args:
+        SERVICE_NAME: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - LOGGING_LEVEL_ROOT=INFO
+    networks:
+      - internal-network
+    depends_on:
+      - kafka
+
+  # Customer Service
+  customer-service:
+    build:
+      context: ../src/backend
+      dockerfile: ../../infra/docker/backend/Dockerfile
+      args:
+        SERVICE_NAME: customer-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8081
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://customer-db:5432/customerdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - internal-network
+    depends_on:
+      - customer-db
+      - kafka
+
+  # Policy Service
+  policy-service:
+    build:
+      context: ../src/backend
+      dockerfile: ../../infra/docker/backend/Dockerfile
+      args:
+        SERVICE_NAME: policy-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8082
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://policy-db:5432/policydb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - internal-network
+    depends_on:
+      - policy-db
+      - kafka
+
+  # Claims Service
+  claims-service:
+    build:
+      context: ../src/backend
+      dockerfile: ../../infra/docker/backend/Dockerfile
+      args:
+        SERVICE_NAME: claims-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8083
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://claims-db:5432/claimsdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - internal-network
+    depends_on:
+      - claims-db
+      - kafka
+
+  # Billing Service
+  billing-service:
+    build:
+      context: ../src/backend
+      dockerfile: ../../infra/docker/backend/Dockerfile
+      args:
+        SERVICE_NAME: billing-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8084
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://billing-db:5432/billingdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - internal-network
+    depends_on:
+      - billing-db
+      - kafka
+
+  # Risk Service
+  risk-service:
+    build:
+      context: ../src/backend
+      dockerfile: ../../infra/docker/backend/Dockerfile
+      args:
+        SERVICE_NAME: risk-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8085
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://risk-db:5432/riskdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    networks:
+      - internal-network
+    depends_on:
+      - risk-db
+      - kafka
+
+  # Customer Portal Frontend
+  customer-portal:
+    build:
+      context: ../src/frontend
+      dockerfile: ../../infra/docker/frontend/Dockerfile
+      args:
+        APP_NAME: customer-portal
+    ports:
+      - "3000:80"
+    networks:
+      - internal-network
+    depends_on:
+      - api-gateway
+
+  # Admin Portal Frontend
+  admin-portal:
+    build:
+      context: ../src/frontend
+      dockerfile: ../../infra/docker/frontend/Dockerfile
+      args:
+        APP_NAME: admin-portal
+    ports:
+      - "3001:80"
+    networks:
+      - internal-network
+    depends_on:
+      - api-gateway
+
+  # Event Bus - Kafka
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.2
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - internal-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.2
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - internal-network
+
+  # Databases - PostgreSQL instances for each service
+  customer-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: customerdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - customer-db-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+
+  policy-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: policydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - policy-db-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+
+  claims-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: claimsdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - claims-db-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+
+  billing-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: billingdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - billing-db-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+
+  risk-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: riskdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - risk-db-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:v2.43.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - internal-network
+
+  grafana:
+    image: grafana/grafana:10.0.3
+    ports:
+      - "3100:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - internal-network
+    depends_on:
+      - prometheus
+
+  # Tracing with Jaeger
+  jaeger:
+    image: jaegertracing/all-in-one:1.47
+    ports:
+      - "16686:16686"
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "14268:14268"
+      - "9411:9411"
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=9411
+    networks:
+      - internal-network
+
+networks:
+  internal-network:
+    driver: bridge
+
+volumes:
+  customer-db-data:
+  policy-db-data:
+  claims-db-data:
+  billing-db-data:
+  risk-db-data:
+  prometheus-data:
+  grafana-data:

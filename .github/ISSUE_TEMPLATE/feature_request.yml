@@ -1,0 +1,74 @@
+name: Feature Request
+description: Suggest an idea for this project
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature!
+  - type: dropdown
+    id: bounded-context
+    attributes:
+      label: Bounded Context
+      description: Which bounded context would this feature belong to?
+      options:
+        - Customer Management
+        - Policy Management
+        - Claims Processing
+        - Billing
+        - Risk Assessment
+        - Cross-cutting/Multiple
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Describe the problem this feature would solve
+      placeholder: As a [type of user], I want [some goal] so that [some reason]
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like
+      placeholder: A clear and concise description of what you want to happen
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered
+      placeholder: A clear and concise description of any alternative solutions or features you've considered
+    validations:
+      required: false
+  - type: textarea
+    id: business-value
+    attributes:
+      label: Business Value
+      description: Describe the business value this feature would provide
+      placeholder: How would this feature help our customers or internal stakeholders?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What criteria must be met for this feature to be considered complete?
+      placeholder: |
+        - Criteria 1
+        - Criteria 2
+        - Criteria 3
+    validations:
+      required: true
+  - type: checkboxes
+    id: domain-alignment
+    attributes:
+      label: Domain Model Alignment
+      description: Confirm that this feature aligns with our domain model
+      options:
+        - label: I have checked the domain documentation and this feature aligns with the established model
+          required: true

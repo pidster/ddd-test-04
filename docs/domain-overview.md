@@ -42,8 +42,8 @@ Using the Core Domain Chart approach:
 ```mermaid
 quadrantChart
     title Core Domain Chart
-    x-axis Low Strategic → High Strategic
-    y-axis Low Complexity → High Complexity
+    x-axis Low Strategic --> High Strategic
+    y-axis Low Complexity --> High Complexity
     quadrant-1 Supporting
     quadrant-2 Generic
     quadrant-3 Core

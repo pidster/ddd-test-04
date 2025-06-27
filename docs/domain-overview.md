@@ -42,16 +42,17 @@ Using the Core Domain Chart approach:
 ```mermaid
 quadrantChart
     title Core Domain Chart
-    x-axis Low Strategic → High Strategic
-    y-axis Low Complexity → High Complexity
-    quadrant-1 Supporting
+    x-axis Low Strategic --> High Strategic
+    y-axis Low Complexity --> High Complexity
+    quadrant-1 Supporting  
     quadrant-2 Generic
     quadrant-3 Core
     quadrant-4 Complex Core
     "Customer Management": [0.7, 0.5]
     "Policy Management": [0.9, 0.8]
     "Claims Processing": [0.8, 0.9]
-    "Billing & Payments": [0.6, 0.6]
+    "Risk Assessment": [0.85, 0.7]
+    "Billing & Payments": [0.6, 0.3]
 ```
 
-The core domains of Lakeside Mutual are Policy Management and Claims Processing, which represent the highest strategic value and complexity.
+The core domains of Lakeside Mutual are **Policy Management**, **Claims Processing**, and **Risk Assessment**, which represent the highest strategic value and complexity. **Customer Management** sits in the core domain with moderate complexity, while **Billing & Payments** is positioned as a supporting domain with lower complexity but still strategically important.

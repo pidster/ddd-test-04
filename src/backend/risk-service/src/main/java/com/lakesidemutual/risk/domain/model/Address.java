@@ -1,9 +1,12 @@
 package com.lakesidemutual.risk.domain.model;
 
+import jakarta.persistence.Embeddable;
+
 /**
  * Value Object representing a physical address for risk assessment purposes.
  * Used primarily for location-based risk evaluation.
  */
+@Embeddable
 public record Address(
     String street,
     String city,

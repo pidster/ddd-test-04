@@ -43,6 +43,6 @@ public record AddressDto(
     }
     
     public Address toDomain() {
-        return new Address(street, city, state, zipCode, country);
+        return new Address(street, city, zipCode, state, country);
     }
 }

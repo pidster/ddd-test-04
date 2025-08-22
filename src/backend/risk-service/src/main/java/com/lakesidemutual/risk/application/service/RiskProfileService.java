@@ -29,7 +29,6 @@ public class RiskProfileService {
     private final RiskProfileRepository riskProfileRepository;
     private final RiskCalculationService riskCalculationService;
     
-    @Autowired
     public RiskProfileService(RiskProfileRepository riskProfileRepository,
                              RiskCalculationService riskCalculationService) {
         this.riskProfileRepository = riskProfileRepository;

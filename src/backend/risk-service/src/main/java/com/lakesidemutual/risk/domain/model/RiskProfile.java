@@ -5,9 +5,6 @@ import com.lakesidemutual.risk.domain.event.RiskProfileUpdated;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
 
 /**
  * RiskProfile aggregate root representing a customer's risk profile

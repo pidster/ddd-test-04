@@ -3,7 +3,6 @@ package com.lakesidemutual.risk.infrastructure.repository;
 import com.lakesidemutual.risk.domain.model.RiskProfile;
 import com.lakesidemutual.risk.domain.model.RiskProfileType;
 import com.lakesidemutual.risk.domain.repository.RiskProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,8 +15,7 @@ import java.util.Optional;
 public class RiskProfileRepositoryImpl implements RiskProfileRepository {
     
     private final JpaRiskProfileRepository jpaRepository;
-    
-    @Autowired
+
     public RiskProfileRepositoryImpl(JpaRiskProfileRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }

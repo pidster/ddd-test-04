@@ -1,0 +1,12 @@
+{
+	"servers": {
+		"persona": {
+			"type": "stdio",
+			"command": "node",
+			"args": [
+				"/Users/stuartwilliams/src/github.com/pidster/persona-mcp/dist/index.js"
+			]
+		}
+	},
+	"inputs": []
+}

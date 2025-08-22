@@ -19,7 +19,6 @@ public class RiskAssessmentRepositoryImpl implements RiskAssessmentRepository {
     
     private final JpaRiskAssessmentRepository jpaRepository;
     
-    @Autowired
     public RiskAssessmentRepositoryImpl(JpaRiskAssessmentRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }

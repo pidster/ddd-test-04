@@ -1,7 +1,5 @@
 package com.lakesidemutual.risk.domain.model;
 
-import java.time.LocalDateTime;
-
 /**
  * Value Object representing a single risk factor that contributes to overall risk assessment.
  * 
@@ -9,7 +7,9 @@ import java.time.LocalDateTime;
  * @param description human-readable description of this factor
  * @param impact the impact multiplier (1.0 = neutral, >1.0 = increases risk, <1.0 = decreases risk)
  */
+@Embeddable
 public record RiskFactor(
+    @Enumerated(EnumType.STRING)
     RiskFactorType type,
     String description,
     Double impact

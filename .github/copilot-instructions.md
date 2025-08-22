@@ -44,6 +44,147 @@ The system is organized into these bounded contexts:
 - **Material UI** with styled-components for styling
 - **Jest** for unit testing
 
+## Persona System
+
+### Overview
+**ALWAYS** use the Persona MCP server to select and adopt the most appropriate AI persona for each development task. The Persona system provides specialized AI personalities with domain-specific expertise that significantly improve code quality, architectural decisions, and problem-solving effectiveness.
+
+### When to Use Personas
+- **Before starting any development task** - Get persona recommendations
+- **When switching between different types of work** - Architecture → Implementation → Testing
+- **When encountering problems or roadblocks** - Get specialized debugging/troubleshooting personas
+- **For code reviews and optimization** - Use review-focused personas
+- **When working with unfamiliar technologies** - Get domain-specific expert personas
+
+### Core Persona Workflow
+
+#### 1. Task Analysis & Persona Discovery
+```
+ALWAYS start with: mcp_persona_discover_persona_for_context
+```
+Use this to automatically discover the best personas for your current context:
+- **File Context**: Pass current file paths/types (e.g., `["src/risk-service/RiskCalculator.java", "pom.xml"]`)
+- **Project Type**: Specify project context (e.g., "microservices insurance system")
+- **Current Task**: Brief description of what you're working on
+- **Team Size**: Choose appropriate level (solo/small-team/large-team/enterprise)
+- **Time Constraint**: Urgency level affects persona selection strategy
+
+#### 2. Get Targeted Recommendations
+```
+Use: mcp_persona_recommend_persona for specific tasks
+```
+For targeted persona selection:
+- **Title**: Clear task description (e.g., "Implement risk calculation algorithm")
+- **Description**: Detailed context and requirements
+- **Domain**: Technical domain (e.g., "financial-services", "backend-development")
+- **Complexity**: Task complexity level (simple/moderate/complex/expert)
+- **Keywords**: Relevant technologies (e.g., ["java", "spring-boot", "ddd", "microservices"])
+- **Include Reasoning**: Always set to `true` for learning
+
+#### 3. Persona Adoption
+Once you receive persona recommendations, adopt the top-recommended persona immediately. The system provides ready-to-use adoption prompts.
+
+### Persona Transition Strategy
+
+#### Workflow-Based Transitions
+Use `mcp_persona_suggest_persona_transition` when moving between phases:
+- **Planning** → **Architecture Specialist**
+- **Design** → **Domain Expert** or **Senior Software Architect**
+- **Implementation** → **Backend Developer** or **Frontend Developer**
+- **Testing** → **QA Engineer** or **Test Automation Specialist**
+- **Debugging** → **Senior Debugger** or **Performance Engineer**
+- **Documentation** → **Technical Writer**
+- **Review** → **Senior Code Reviewer**
+
+#### Problem-Specific Transitions
+Switch personas when encountering:
+- **Performance Issues** → Performance Engineer
+- **Security Concerns** → Security Specialist
+- **Database Problems** → Database Architect
+- **Integration Issues** → Integration Specialist
+- **Domain Modeling** → Domain-Driven Design Expert
+
+### Domain-Specific Personas for Lakeside Mutual
+
+#### Insurance Domain Experts
+- **Insurance Domain Expert** - For business rule implementation
+- **Financial Services Architect** - For billing and payments
+- **Compliance Specialist** - For regulatory requirements
+- **Risk Assessment Expert** - For underwriting logic
+
+#### Technical Specialists
+- **Spring Boot Expert** - For backend microservices
+- **DDD Practitioner** - For domain modeling
+- **Event-Driven Architecture Expert** - For Kafka integration
+- **Database Designer** - For PostgreSQL/MongoDB schemas
+- **React/TypeScript Expert** - For frontend development
+
+#### Quality & Operations
+- **Senior QA Engineer** - For testing strategies
+- **DevOps Engineer** - For deployment and monitoring
+- **Security Architect** - For security implementation
+- **Performance Engineer** - For optimization
+
+### Best Practices
+
+#### Persona Selection Guidelines
+1. **Match Complexity**: Expert personas for complex tasks, generalist for simple ones
+2. **Context Matters**: Consider deadlines, team size, and project phase
+3. **Domain First**: Always prefer domain-specific expertise when available
+4. **Transition Proactively**: Switch before getting stuck, not after
+
+#### Effective Persona Usage
+1. **Provide Context**: Share relevant file paths, error messages, and project details
+2. **Be Specific**: Clear task descriptions get better persona matches
+3. **Trust Recommendations**: The system has 95% accuracy - follow suggestions
+4. **Monitor Effectiveness**: Use analytics to track persona performance
+
+#### Performance Monitoring
+Use `mcp_persona_analyze_persona_effectiveness` to:
+- Track progress with current persona
+- Identify gaps in expertise
+- Optimize persona selection over time
+- Improve development velocity
+
+### Integration with Development Workflow
+
+#### Pre-Development Checklist
+1. ✅ Run persona discovery for current context
+2. ✅ Get persona recommendations for specific task
+3. ✅ Adopt recommended persona
+4. ✅ Proceed with development using persona expertise
+
+#### During Development
+- Monitor for workflow stage changes
+- Switch personas when encountering different problem types
+- Use persona expertise for architecture decisions
+- Leverage domain knowledge for business logic
+
+#### Post-Development
+- Use review-focused personas for code quality
+- Analyze persona effectiveness
+- Document successful persona patterns for team learning
+
+### Example Usage Patterns
+
+#### Starting a New Feature
+```
+1. Discover context: Current files + "implement new risk calculation feature"
+2. Get recommendations: Title="Risk Calculation Implementation" + domain context
+3. Adopt: Top persona (likely Domain Expert or Insurance Specialist)
+4. Develop: Use persona expertise for domain modeling and implementation
+```
+
+#### Debugging Issues
+```
+1. Transition check: workflowStage="debugging" + current problem
+2. Switch to: Debugger or Performance Engineer based on issue type
+3. Solve: Apply specialized debugging techniques
+4. Return: To original persona or move to testing persona
+```
+
+This systematic approach ensures you always have the right expertise for the task at hand, leading to higher quality code, better architectural decisions, and faster problem resolution.
+
 ## Code Generation Rules
 
 ### Backend Java Code

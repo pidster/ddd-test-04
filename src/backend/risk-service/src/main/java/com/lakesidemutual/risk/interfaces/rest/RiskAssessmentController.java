@@ -4,7 +4,6 @@ import com.lakesidemutual.risk.application.service.RiskAssessmentService;
 import com.lakesidemutual.risk.domain.model.RiskAssessment;
 import com.lakesidemutual.risk.interfaces.dto.RiskAssessmentRequest;
 import com.lakesidemutual.risk.interfaces.dto.RiskAssessmentResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,6 @@ public class RiskAssessmentController {
 
     private final RiskAssessmentService riskAssessmentService;
 
-    @Autowired
     public RiskAssessmentController(RiskAssessmentService riskAssessmentService) {
         this.riskAssessmentService = riskAssessmentService;
     }

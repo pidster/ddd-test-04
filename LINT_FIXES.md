@@ -6,9 +6,9 @@ The customer-portal frontend is found in the project directory: 'src/frontend/cu
 
 ## Lint Fixes
 
-- [ ] **Install missing dependencies**
+- [x] **Install missing dependencies**
     - Run: `npm install react react-dom @mui/material @mui/icons-material @reduxjs/toolkit react-redux react-router-dom react-error-boundary`
-    - Verify all required packages are present in `package.json`.
+    - Verify all required packages are present in `package.json`. (Completed)
 
 - [ ] **Fix import/module resolution errors**
     - Check all import paths for typos or missing files.

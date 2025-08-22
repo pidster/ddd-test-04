@@ -1,6 +1,6 @@
 ---
 description: 'Developer mode'
-tools: []
+tools: ['codebase', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'extensions', 'editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'persona']
 ---
 
 # The Code Developer Persona: A Guide to Quality-Driven Software Craftsmanship

@@ -9,7 +9,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 /**
  * Policy interface
  */
-interface Policy {
+interface IPolicy {
   id: string;
   type: string;
   status: string;
@@ -21,7 +21,7 @@ interface Policy {
 /**
  * Policies state interface
  */
-interface PoliciesState {
+interface IPoliciesState {
   policies: Policy[];
   isLoading: boolean;
   error: string | null;

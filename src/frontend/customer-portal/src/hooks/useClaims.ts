@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 /**
  * Claim interface representing insurance claim data
  */
-interface Claim {
+interface IClaim {
   id: string;
   type: string;
   status: 'PENDING' | 'UNDER_REVIEW' | 'APPROVED' | 'DENIED' | 'PAID';
@@ -23,7 +23,7 @@ interface Claim {
 /**
  * Claims hook return type
  */
-interface UseClaimsReturn {
+interface IUseClaimsReturn {
   /** Array of customer claims */
   claims: Claim[] | null;
   /** Whether claims are being loaded */

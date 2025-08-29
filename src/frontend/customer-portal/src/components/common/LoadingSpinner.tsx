@@ -10,7 +10,7 @@ import React from 'react';
 /**
  * Props for the LoadingSpinner component
  */
-interface LoadingSpinnerProps {
+interface ILoadingSpinnerProps {
   /** Loading message to display */
   message?: string;
   /** Size of the spinner */

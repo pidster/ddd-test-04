@@ -9,7 +9,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 /**
  * UI state interface
  */
-interface UIState {
+interface IUIState {
   sidebarOpen: boolean;
   theme: 'light' | 'dark';
   notifications: string[];

@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 /**
  * User interface representing authenticated customer
  */
-interface User {
+interface IUser {
   id: string;
   email: string;
   firstName: string;
@@ -20,7 +20,7 @@ interface User {
 /**
  * Authentication hook return type
  */
-interface UseAuthReturn {
+interface IUseAuthReturn {
   /** Current authenticated user */
   user: User | null;
   /** Whether user is authenticated */

@@ -9,7 +9,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 /**
  * Claim interface
  */
-interface Claim {
+interface IClaim {
   id: string;
   type: string;
   status: string;
@@ -21,7 +21,7 @@ interface Claim {
 /**
  * Claims state interface
  */
-interface ClaimsState {
+interface IClaimsState {
   claims: Claim[];
   isLoading: boolean;
   error: string | null;

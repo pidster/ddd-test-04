@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 /**
  * Policy interface representing insurance policy data
  */
-interface Policy {
+interface IPolicy {
   id: string;
   type: string;
   status: 'ACTIVE' | 'PENDING' | 'EXPIRED' | 'CANCELLED';
@@ -22,7 +22,7 @@ interface Policy {
 /**
  * Policies hook return type
  */
-interface UsePoliciesReturn {
+interface IUsePoliciesReturn {
   /** Array of customer policies */
   policies: Policy[] | null;
   /** Whether policies are being loaded */

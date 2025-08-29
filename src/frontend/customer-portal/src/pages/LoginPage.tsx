@@ -25,7 +25,7 @@ import { useAuth } from '../hooks/useAuth';
 /**
  * Form data interface for login credentials
  */
-interface LoginFormData {
+interface ILoginFormData {
   email: string;
   password: string;
 }

@@ -11,7 +11,7 @@ import React from 'react';
 /**
  * Props for the ErrorAlert component
  */
-interface ErrorAlertProps {
+interface IErrorAlertProps {
   /** Error message to display */
   message: string;
   /** Detailed error information (optional) */

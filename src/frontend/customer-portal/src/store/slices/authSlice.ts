@@ -9,7 +9,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 /**
  * User interface for authenticated customer
  */
-interface User {
+interface IUser {
   id: string;
   email: string;
   firstName: string;
@@ -20,7 +20,7 @@ interface User {
 /**
  * Authentication state interface
  */
-interface AuthState {
+interface IAuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
